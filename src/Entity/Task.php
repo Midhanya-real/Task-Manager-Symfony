@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
+#[ORM\Table(name: 'task')]
 class Task
 {
     #[ORM\Id]
@@ -20,7 +21,7 @@ class Task
     #[ORM\Column(length: 255)]
     private ?string $about = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -28,7 +29,7 @@ class Task
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_email = null;
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -83,14 +84,14 @@ class Task
         return $this;
     }
 
-    public function getUserEmail(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_email;
+        return $this->user;
     }
 
-    public function setUserEmail(?User $user_email): static
+    public function setUser(?User $user): static
     {
-        $this->user_email = $user_email;
+        $this->user = $user;
 
         return $this;
     }
