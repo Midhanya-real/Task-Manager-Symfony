@@ -38,7 +38,7 @@ class TaskCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield AssociationField::new('user',);
+        yield AssociationField::new('user');
         yield TextField::new('head');
         yield TextareaField::new('about')->hideOnIndex();
         yield ChoiceField::new('status')->setChoices(TaskStatus::cases());
