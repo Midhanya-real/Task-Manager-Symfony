@@ -3,36 +3,83 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Form\TaskType;
+use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-//#[Route('/task')]
+#[Route('/task')]
 class TaskController extends AbstractController
 {
-    #[Route('/task', name: 'tasks', methods: ['GET'])]
-    public function index(): Response
+    #[Route('/', name: 'app_task_index', methods: ['GET'])]
+    public function index(TaskRepository $taskRepository): Response
     {
+        $records = $this->isGranted('ROLE_ADMIN')
+            ? $taskRepository->findAll()
+            : $taskRepository->findBy(['user' => $this->getUser()]);
+
         return $this->render('task/index.html.twig', [
-            'controller_name' => 'TaskController',
+            'tasks' => $records,
         ]);
     }
 
-    #[Route('/task/{id}', name: 'task', methods: ['GET'])]
-    public function show(Task $task)
+    #[Route('/new', name: 'app_task_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, TaskRepository $taskRepository): Response
     {
+        $task = new Task();
+        $form = $this->createForm(TaskType::class, $task);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $taskRepository->save($task, true);
+
+            return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('task/new.html.twig', [
+            'task' => $task,
+            'form' => $form,
+        ]);
     }
 
-    #[Route('/task/{id}/update', name: 'update_task', methods: ['PUT'])]
-    public function update(Task $task)
+    #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]
+    public function show(Task $task): Response
     {
-
+        $task = $this->isGranted('ROLE_ADMIN') || $task->getUser() === $this->getUser()
+            ? $task
+            : null;
+        return $this->render('task/show.html.twig', [
+            'task' => $task,
+        ]);
     }
 
-    #[Route('/task/{id}/delete', name: 'delete_task', methods: ['DELETE'])]
-    public function delete(Task $task)
+    #[Route('/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Task $task, TaskRepository $taskRepository): Response
     {
+        $form = $this->createForm(TaskType::class, $task);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $taskRepository->save($task, true);
+
+            return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('task/edit.html.twig', [
+            'task' => $task,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_task_delete', methods: ['POST'])]
+    public function delete(Request $request, Task $task, TaskRepository $taskRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $task->getId(), $request->request->get('_token'))) {
+            $taskRepository->remove($task, true);
+        }
+
+        return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     }
 }
