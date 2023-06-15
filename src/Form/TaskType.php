@@ -21,8 +21,14 @@ class TaskType extends AbstractType
         $builder
             ->add('head', TextType::class)
             ->add('about', TextareaType::class)
-            ->add('status', EnumType::class, ['class' => TaskStatus::class])
-            ->add('end_time', DateTimeType::class);
+            ->add('status', EnumType::class, [
+                'class' => TaskStatus::class
+            ])
+            ->add('end_time', DateTimeType::class, [
+                'date_label' => 'End on',
+                'date_format' => 'dd.MM.yyyyTH:i',
+                'html5' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

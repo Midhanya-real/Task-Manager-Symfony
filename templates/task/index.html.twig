@@ -21,7 +21,7 @@
                 <td>{{ task.head }}</td>
                 <td>{{ task.about }}</td>
                 <td>{{ task.status.value }}</td>
-                <td>{{ task.endTime ? task.endTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ task.endTime ? task.endTime|date('d-m-Y H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
