@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Config\Statuses\TaskStatus;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -18,7 +19,7 @@ class TaskController extends AbstractController
     {
         $records = $this->isGranted('ROLE_ADMIN')
             ? $taskRepository->findAll()
-            : $taskRepository->findBy(['user' => $this->getUser()]);
+            : $taskRepository->findByActiveUserTasks(user: $this->getUser(), exception: TaskStatus::Finish);
 
         return $this->render('task/index.html.twig', [
             'tasks' => $records,
