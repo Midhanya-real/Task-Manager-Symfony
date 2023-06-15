@@ -17,9 +17,7 @@ class TaskController extends AbstractController
     #[Route('/', name: 'app_task_index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
-        $records = $this->isGranted('ROLE_ADMIN')
-            ? $taskRepository->findAll()
-            : $taskRepository->findByActiveUserTasks(user: $this->getUser(), exception: TaskStatus::Finish);
+        $records = $taskRepository->findByActiveUserTasks(user: $this->getUser(), exception: TaskStatus::Finish);
 
         return $this->render('task/index.html.twig', [
             'tasks' => $records,
@@ -30,6 +28,7 @@ class TaskController extends AbstractController
     public function new(Request $request, TaskRepository $taskRepository): Response
     {
         $task = new Task();
+        $task->setUser($this->getUser());
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
