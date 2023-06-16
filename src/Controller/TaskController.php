@@ -47,7 +47,7 @@ class TaskController extends AbstractController
     #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]
     public function show(Task $task): Response
     {
-        $task = $this->isGranted('ROLE_ADMIN') || $task->getUser() === $this->getUser()
+        $task = $task->getUser() === $this->getUser()
             ? $task
             : null;
         return $this->render('task/show.html.twig', [
