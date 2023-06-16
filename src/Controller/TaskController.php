@@ -47,9 +47,10 @@ class TaskController extends AbstractController
     #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]
     public function show(Task $task): Response
     {
-        $task = $task->getUser() === $this->getUser()
-            ? $task
-            : null;
+        if ($task->getUser() !== $this->getUser()) {
+            return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->render('task/show.html.twig', [
             'task' => $task,
         ]);
@@ -58,6 +59,10 @@ class TaskController extends AbstractController
     #[Route('/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Task $task, TaskRepository $taskRepository): Response
     {
+        if ($task->getUser() !== $this->getUser()) {
+            return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
@@ -76,6 +81,10 @@ class TaskController extends AbstractController
     #[Route('/{id}', name: 'app_task_delete', methods: ['POST'])]
     public function delete(Request $request, Task $task, TaskRepository $taskRepository): Response
     {
+        if ($task->getUser() !== $this->getUser()) {
+            return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         if ($this->isCsrfTokenValid('delete' . $task->getId(), $request->request->get('_token'))) {
             $taskRepository->remove($task, true);
         }
