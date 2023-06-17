@@ -2,9 +2,11 @@
 @import './variables';
 
 body {
-  display: flex;
+  display: block;
+  position: absolute;
   flex-direction: column;
   height: 100vh;
+  width: fit-content;
 }
 
 a {
