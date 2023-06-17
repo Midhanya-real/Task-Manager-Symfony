@@ -1,0 +1,16 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\n###> symfony/framework-bundle ###\n/.env.local\n/.env.local.php\n/.env.*.local\n/config/secrets/prod/prod.decrypt.private.php\n/public/bundles/\n/var/\n/vendor/\n###< symfony/framework-bundle ###\n\n###> phpunit/phpunit ###\n/phpunit.xml\n.phpunit.result.cache\n###< phpunit/phpunit ###\n\n###> symfony/phpunit-bridge ###\n.phpunit.result.cache\n/phpunit.xml\n###< symfony/phpunit-bridge ###\n\n###> symfony/webpack-encore-bundle ###\n/node_modules/\n/public/build/\nnpm-debug.log\nyarn-error.log\n###< symfony/webpack-encore-bundle ###\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	
++++ b/.gitignore	
+@@ -25,3 +25,5 @@
+ npm-debug.log
+ yarn-error.log
+ ###< symfony/webpack-encore-bundle ###
++
++.idea
