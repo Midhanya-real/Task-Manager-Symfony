@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3bec424b-a9f1-4cd0-867f-ce47b87f671e" name="Changes" comment="">
-      <changelist_data name="Midhanya-real" email="57554583+midhanya-real@users.noreply.github.com" date="1686656482000" />
+    <list default="true" id="a246a2b2-9c19-4508-a3a5-692167666781" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="user_panel" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -176,8 +177,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "2dc07513",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Projects/guestbook",
+    "last_opened_file_path": "C:/Users/mihan/OneDrive/Рабочий стол/taskManagerSymfony",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -201,7 +203,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3bec424b-a9f1-4cd0-867f-ce47b87f671e" name="Changes" comment="" />
+      <changelist id="a246a2b2-9c19-4508-a3a5-692167666781" name="Changes" comment="" />
       <created>1686576837807</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -219,6 +221,8 @@
       <workItem from="1686939732019" duration="493000" />
       <workItem from="1686991097453" duration="1963000" />
       <workItem from="1686993555233" duration="9589000" />
+      <workItem from="1687100065487" duration="975000" />
+      <workItem from="1687101129178" duration="235000" />
     </task>
     <servers />
   </component>
