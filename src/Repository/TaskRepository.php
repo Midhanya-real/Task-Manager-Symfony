@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Config\Statuses\TaskStatus;
 use App\Entity\Task;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +39,17 @@ class TaskRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByActiveUserTasks(?User $user, TaskStatus $exception): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.user = :u')
+            ->andWhere('t.status != :exp')
+            ->setParameter('exp', $exception->value)
+            ->setParameter('u', $user)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

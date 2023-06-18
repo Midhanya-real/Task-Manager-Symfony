@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\Statuses\TaskStatus;
 use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,9 +25,9 @@ class Task
     #[Assert\NotBlank()]
     private ?string $about = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, enumType: TaskStatus::class)]
     #[Assert\NotBlank()]
-    private ?string $status = null;
+    private TaskStatus $status = TaskStatus::Start;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank()]
@@ -66,12 +67,12 @@ class Task
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?TaskStatus
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(TaskStatus $status): static
     {
         $this->status = $status;
 

@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 
 class TaskCrudController extends AbstractCrudController
 {
@@ -41,7 +42,12 @@ class TaskCrudController extends AbstractCrudController
         yield AssociationField::new('user');
         yield TextField::new('head');
         yield TextareaField::new('about')->hideOnIndex();
-        yield ChoiceField::new('status')->setChoices(TaskStatus::cases());
+        yield ChoiceField::new('status', 'status')
+            ->hideOnIndex()
+            ->setFormType(EnumType::class)
+            ->setFormTypeOption('class', TaskStatus::class)
+            ->setChoices(['status' => TaskStatus::cases()]);
+
         yield DateTimeField::new('end_time', 'end');
     }
 

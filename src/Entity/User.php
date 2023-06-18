@@ -33,8 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotBlank()]
-    #[Assert\Length(min: 8)]
+    #[Assert\Length(min: 6)]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Task::class, orphanRemoval: true)]

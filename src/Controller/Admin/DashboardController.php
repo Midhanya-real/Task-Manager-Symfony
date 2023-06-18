@@ -52,8 +52,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToRoute('Back to Task Manager', 'fa fa-home', 'tasks');
+        yield MenuItem::linkToRoute('Back to Task Manager', 'fa fa-home', 'app_task_index');
         yield MenuItem::linkToCrud('Tasks', 'fas fa-list', Task::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class)
+            ->setPermission('ROLE_SUPER_ADMIN');
     }
 }
